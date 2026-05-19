@@ -1,0 +1,7 @@
+POST localhost:8080/members/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "asdf@naver.com",
+  "password": "qwer1234"
+}

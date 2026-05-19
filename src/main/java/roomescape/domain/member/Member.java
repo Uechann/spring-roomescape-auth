@@ -23,6 +23,20 @@ public class Member {
         this.memberRole = memberRole;
     }
 
+    public static Member of(Long memberId, Member member) {
+        return new Member(
+                memberId,
+                member.getName(),
+                member.getEmail(),
+                member.getPassword(),
+                member.getMemberRole()
+        );
+    }
+
+    public boolean matchingPassword(String password) {
+        return this.password.equals(password);
+    }
+
     public Long getId() {
         return id;
     }

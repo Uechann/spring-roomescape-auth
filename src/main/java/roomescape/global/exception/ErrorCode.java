@@ -6,6 +6,8 @@ public enum ErrorCode {
 
     // auth
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "로그인이 필요합니다."),
+    MEMBER_NOT_FOUNT(HttpStatus.NOT_FOUND, "회원이 존재하지 않습니다."),
+    PASSWORD_NOT_CORRECT(HttpStatus.FORBIDDEN, "비밀번호가 존재하지 않습니다."),
 
     INVALID_INPUT(HttpStatus.BAD_REQUEST, "유효하지 않은 입력값입니다."),
 
