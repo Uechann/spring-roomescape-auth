@@ -2,11 +2,11 @@ package roomescape.auth.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import roomescape.domain.member.Member;
-import roomescape.domain.member.MemberRole;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -18,8 +18,8 @@ public class JwtProvider {
     private final Long expirationMs;
 
     public JwtProvider(
-            @Value("jwt.secret") String secret,
-            @Value("jwt.expiration-ms") Long expirationMs
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.expiration-ms}") Long expirationMs
     ) {
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes());
         this.expirationMs = expirationMs;

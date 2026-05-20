@@ -1,0 +1,27 @@
+### 회원가입
+POST http://localhost:8080/members/signup
+Content-Type: application/json
+
+{
+  "email": "uichan@example.com",
+  "password": "pw1234",
+  "name": "의찬"
+}
+
+### --- 웹 흐름 ---
+### 세션 로그인
+POST http://localhost:8080/members/login
+Content-Type: application/json
+
+{ "email": "uichan@example.com", "password": "pw1234" }
+
+### 쿠키로 예약 생성 (HTTP 클라이언트가 쿠키 자동 처리)
+POST http://localhost:8080/reservations
+Content-Type: application/json
+
+{
+  "date": "2026-05-30",
+  "name": "브라운",
+  "timeId": 1,
+  "themeId": 1
+}

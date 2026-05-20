@@ -1,0 +1,51 @@
+### 회원가입
+POST http://localhost:8080/members/signup
+Content-Type: application/json
+
+{
+  "email": "uichan@example.com",
+  "password": "pw1234",
+  "name": "의찬"
+}
+
+### --- 모바일 흐름 ---
+### 토큰 로그인 → 응답으로 accessToken 받음
+POST http://localhost:8080/members/login/token
+Content-Type: application/json
+
+{ "email": "uichan@example.com", "password": "pw1234" }
+
+### 토큰으로 예약 생성 (위에서 받은 토큰 사용)
+POST http://localhost:8080/reservations
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZW1haWwiOiJ1aWNoYW5AZXhhbXBsZS5jb20iLCJuYW1lIjoi7J2Y7LCsIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NzkyNzk2NDYsImV4cCI6MTc3OTI4MzI0Nn0.v2-VtmX3gEQC4udZPe9jvcOIdvMFYK-eafQHpbo0yqdoAOQz4taT4SMmXGOpWGzc89-0y5baRxaaQm-34DlnWw
+
+{
+  "date": "2026-05-30",
+  "name": "브라운",
+  "timeId": 1,
+  "themeId": 1
+}
+
+### 토큰 없이 호출 → 401
+POST http://localhost:8080/reservations
+Content-Type: application/json
+
+{
+  "date": "2026-05-30",
+  "name": "브라운",
+  "timeId": 1,
+  "themeId": 1
+}
+
+### 위조된 토큰 → 401
+POST http://localhost:8080/reservations
+Content-Type: application/json
+Authorization: Bearer invalid.token.here
+
+{
+  "date": "2026-05-30",
+  "name": "브라운",
+  "timeId": 1,
+  "themeId": 1
+}
