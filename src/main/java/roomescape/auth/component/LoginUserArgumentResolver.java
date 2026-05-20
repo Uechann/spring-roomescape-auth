@@ -17,14 +17,13 @@ import static roomescape.auth.SessionConstant.LOGIN_SESSION;
 import static roomescape.global.exception.ErrorCode.UNAUTHORIZED;
 
 @Component
-public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver{
+public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         // 어노테이션 소유 여부 && 객체 타입 여부
-        boolean hasAnnotation = parameter.hasParameterAnnotation(LoginUser.class);
-        boolean assignableFrom = LoginMember.class.isAssignableFrom(parameter.getParameterType());
-        return hasAnnotation && assignableFrom;
+        return parameter.hasParameterAnnotation(LoginUser.class)
+                && LoginMember.class.isAssignableFrom(parameter.getParameterType());
     }
 
     @Nullable
@@ -33,18 +32,13 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver{
             MethodParameter parameter,
             @Nullable ModelAndViewContainer mavContainer,
             NativeWebRequest webRequest,
-            @Nullable WebDataBinderFactory binderFactory ) throws Exception {
+            @Nullable WebDataBinderFactory binderFactory) throws Exception {
 
         HttpServletRequest servletRequest = webRequest.getNativeRequest(HttpServletRequest.class);
-        HttpSession session = servletRequest.getSession(false);
-        if (session == null) {
-            throw new CustomException(UNAUTHORIZED);
-        }
 
-        Object attribute = session.getAttribute(LOGIN_SESSION);
-        if (attribute == null) {
+        Object attribute = servletRequest.getAttribute("loginMember");
+        if (!(attribute instanceof LoginMember loginMember)) {
             throw new CustomException(UNAUTHORIZED);
-
         }
         return attribute;
     }

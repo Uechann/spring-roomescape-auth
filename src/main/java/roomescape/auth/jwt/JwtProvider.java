@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import roomescape.domain.member.Member;
 import roomescape.domain.member.MemberRole;
 
 import javax.crypto.SecretKey;
@@ -24,15 +25,15 @@ public class JwtProvider {
         this.expirationMs = expirationMs;
     }
 
-    public String createToken(Long memberId, String email, String name, MemberRole memberRole) {
+    public String createToken(Member member) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + expirationMs);
 
         return Jwts.builder()
-                .subject(String.valueOf(memberId))
-                .claim("email", email)
-                .claim("name", name)
-                .claim("role", memberRole.name())
+                .subject(String.valueOf(member.getId()))
+                .claim("email", member.getEmail())
+                .claim("name", member.getName())
+                .claim("role", member.getMemberRole().name())
                 .issuedAt(now)
                 .expiration(expiry)
                 .signWith(secretKey)

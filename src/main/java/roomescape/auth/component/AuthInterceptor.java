@@ -7,7 +7,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import roomescape.auth.LoginRequired;
+import roomescape.auth.SessionConstant;
+import roomescape.auth.extractor.AuthExtractor;
+import roomescape.controller.dto.auth.LoginMember;
 import roomescape.global.exception.CustomException;
+
+import java.util.List;
 
 import static roomescape.auth.SessionConstant.LOGIN_SESSION;
 import static roomescape.global.exception.ErrorCode.UNAUTHORIZED;
@@ -15,6 +20,12 @@ import static roomescape.global.exception.ErrorCode.UNAUTHORIZED;
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
 
+    private final List<AuthExtractor> authExtractors;
+
+    // 스프링이 AuthExtractor로 등록된 빈들을 모두 등록시켜줌
+    public AuthInterceptor(List<AuthExtractor> authExtractors) {
+        this.authExtractors = authExtractors;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -29,12 +40,14 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        // 세션에 로그인 정보가 없으면 예외 처리
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute(LOGIN_SESSION) == null) {
-            throw new CustomException(UNAUTHORIZED);
-        }
+        LoginMember loginMember = authExtractors.stream()
+                .filter(authExtractor -> authExtractor.supports(request))
+                .findFirst()
+                .flatMap(authExtractor -> authExtractor.extract(request))
+                .orElseThrow(() -> new CustomException(UNAUTHORIZED));
 
+        // HttpServletRequest에 저장 loginMember를 해둔다.
+        request.setAttribute("loginMember", loginMember);
         return true;
     }
 }

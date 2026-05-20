@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;import org.springframework.web.bi
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import roomescape.auth.TokenResponse;
+import roomescape.auth.jwt.JwtProvider;
 import roomescape.controller.dto.auth.LoginMember;
 import roomescape.controller.dto.auth.LoginRequest;
 import roomescape.controller.dto.auth.SignupRequest;
@@ -18,9 +20,11 @@ import roomescape.service.MemberService;
 public class MemberController {
 
     private final MemberService memberService;
+    private final JwtProvider jwtProvider;
 
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, JwtProvider jwtProvider) {
         this.memberService = memberService;
+        this.jwtProvider = jwtProvider;
     }
 
     @PostMapping("/signup")
@@ -30,9 +34,17 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> signup(@Valid @RequestBody LoginRequest loginRequest, HttpSession session) {
+    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest loginRequest, HttpSession session) {
         Member member = memberService.login(loginRequest.email(), loginRequest.password());
         session.setAttribute(SessionConstant.LOGIN_SESSION, LoginMember.from(member));
         return ResponseEntity.status(200).build();
     }
+
+    @PostMapping("/login/token")
+    public ResponseEntity<TokenResponse> loginWithToken(@Valid @RequestBody LoginRequest loginRequest, HttpSession session) {
+        Member member = memberService.login(loginRequest.email(), loginRequest.password());
+        String token = jwtProvider.createToken(member);
+        return ResponseEntity.status(200).body(TokenResponse.of(token));
+    }
+
 }
