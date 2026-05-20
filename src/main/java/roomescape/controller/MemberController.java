@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;import org.springframework.web.bi
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import roomescape.controller.dto.LoginMember;
-import roomescape.controller.dto.LoginRequest;
-import roomescape.controller.dto.SignupRequest;
+import roomescape.controller.dto.auth.LoginMember;
+import roomescape.controller.dto.auth.LoginRequest;
+import roomescape.controller.dto.auth.SignupRequest;
 import roomescape.domain.member.Member;
 import roomescape.global.component.SessionConstant;
 import roomescape.service.MemberService;

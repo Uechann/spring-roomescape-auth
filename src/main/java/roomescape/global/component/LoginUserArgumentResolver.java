@@ -10,7 +10,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import roomescape.auth.LoginUser;
-import roomescape.controller.dto.LoginMember;
+import roomescape.controller.dto.auth.LoginMember;
 import roomescape.global.exception.CustomException;
 
 import static roomescape.global.component.SessionConstant.LOGIN_SESSION;
