@@ -1,5 +1,7 @@
 package roomescape.domain.member;
 
+import java.util.Objects;
+
 public class Member {
 
     private Long id;
@@ -55,5 +57,16 @@ public class Member {
 
     public MemberRole getMemberRole() {
         return memberRole;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Member member)) return false;
+        return Objects.equals(id, member.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

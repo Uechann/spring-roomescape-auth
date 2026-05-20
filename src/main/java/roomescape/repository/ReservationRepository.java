@@ -11,6 +11,8 @@ public interface ReservationRepository {
 
     Optional<Reservation> findById(long id);
 
+    List<Reservation> findByMemberId(Long memberId);
+
     Reservation save(Reservation reservation);
 
     void deleteById(long id);
@@ -19,8 +21,6 @@ public interface ReservationRepository {
 
     boolean isExistBy(Long reservationId);
 
-    List<Reservation> findByName(String name);
-
     void updateStatus(Reservation reservation);
 
     void updateDateAndTimeAndTheme(Reservation reservation);
@@ -28,4 +28,6 @@ public interface ReservationRepository {
     boolean existsByThemeId(long themeId);
 
     boolean existsByTimeId(long timeId);
+
+
 }

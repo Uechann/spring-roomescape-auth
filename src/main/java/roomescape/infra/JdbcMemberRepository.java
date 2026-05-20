@@ -61,7 +61,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     // 사용자 id로 조회
     @Override
-    public Optional<Member> findById(String id) {
+    public Optional<Member> findById(Long id) {
         String sql = """
                 SELECT 
                     m.id,

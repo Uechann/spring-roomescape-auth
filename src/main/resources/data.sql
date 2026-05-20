@@ -1,8 +1,8 @@
 -- 0. 회원(Member) 삽입
 INSERT INTO member (name, email, password, role) VALUES
                                                      ('관리자', 'admin@test.com', 'password', 'ADMIN'),
-                                                     ('게스트', 'guest@test.com', 'password', 'MEMBER'),
-                                                     ('과거게스트', 'past@test.com', 'password', 'MEMBER');
+                                                     ('게스트', 'guest@test.com', 'password', 'USER'),
+                                                     ('과거게스트', 'past@test.com', 'password', 'USER');
 
 -- 1. 테마(Theme) 20개 삽입
 INSERT INTO theme (name, description, thumbnail_url) VALUES
