@@ -14,7 +14,7 @@
 - [x] 인증 공통 처리
 
 ### 2단계
-- [ ] Jwt 토큰 방식 인증 구현
+- [x] Jwt 토큰 방식 인증 구현
 - [ ] AuthExtractor (세션, 토큰 인증 추출기 전략 패턴 구현)
 - [ ] Interceptor, ArgumentResolver 변경된 방향으로 수정하기 
 - [ ] MemberController 웹(세션), 모바일(토큰) 방식 구분과 인증 방식 추출 분리
