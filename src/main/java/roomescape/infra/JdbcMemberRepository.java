@@ -1,4 +1,4 @@
-package roomescape.repository;
+package roomescape.infra;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import roomescape.domain.member.Member;
 import roomescape.domain.member.MemberRole;
+import roomescape.repository.MemberRepository;
 
 import java.util.Map;
 import java.util.Optional;

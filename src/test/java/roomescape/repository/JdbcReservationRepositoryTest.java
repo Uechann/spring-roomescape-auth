@@ -10,6 +10,7 @@ import org.springframework.test.context.jdbc.Sql;
 import roomescape.domain.Reservation;
 import roomescape.domain.Theme;
 import roomescape.domain.Time;
+import roomescape.infra.JdbcReservationRepository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

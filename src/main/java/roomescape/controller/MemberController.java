@@ -33,6 +33,6 @@ public class MemberController {
     public ResponseEntity<Void> signup(@Valid @RequestBody LoginRequest loginRequest, HttpSession session) {
         Member member = memberService.login(loginRequest.email(), loginRequest.password());
         session.setAttribute(SessionConstant.LOGIN_SESSION, LoginMember.from(member));
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(200).build();
     }
 }
