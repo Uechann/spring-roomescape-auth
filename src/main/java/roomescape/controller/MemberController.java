@@ -47,4 +47,9 @@ public class MemberController {
         return ResponseEntity.status(200).body(TokenResponse.of(token));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpSession session) {
+        session.invalidate();
+        return ResponseEntity.status(200).build();
+    }
 }
