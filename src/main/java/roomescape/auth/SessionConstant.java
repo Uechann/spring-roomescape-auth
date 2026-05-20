@@ -1,4 +1,4 @@
-package roomescape.global.component;
+package roomescape.auth;
 
 public class SessionConstant {
 

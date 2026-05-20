@@ -1,4 +1,4 @@
-package roomescape.global.component;
+package roomescape.auth.component;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import roomescape.auth.LoginRequired;
 import roomescape.global.exception.CustomException;
 
-import static roomescape.global.component.SessionConstant.LOGIN_SESSION;
+import static roomescape.auth.SessionConstant.LOGIN_SESSION;
 import static roomescape.global.exception.ErrorCode.UNAUTHORIZED;
 
 @Component

@@ -10,7 +10,7 @@ import roomescape.controller.dto.auth.LoginMember;
 import roomescape.controller.dto.auth.LoginRequest;
 import roomescape.controller.dto.auth.SignupRequest;
 import roomescape.domain.member.Member;
-import roomescape.global.component.SessionConstant;
+import roomescape.auth.SessionConstant;
 import roomescape.service.MemberService;
 
 @RestController
