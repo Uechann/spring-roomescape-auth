@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FakeThemeSlotDao implements ThemeSlotRepository {
+public class FakeThemeSlotRepository implements ThemeSlotRepository {
 
     private final Map<Long, ThemeSlot> storage = new HashMap<>();
     private long sequence = 1L;

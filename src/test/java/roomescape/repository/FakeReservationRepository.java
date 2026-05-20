@@ -1,13 +1,13 @@
 package roomescape.repository;
 
-import roomescape.domain.Reservation;
+import roomescape.domain.reservation.Reservation;
 import roomescape.global.exception.CustomException;
 import roomescape.global.exception.ErrorCode;
 
 import java.time.LocalDate;
 import java.util.*;
 
-public class FakeReservationDao implements ReservationRepository {
+public class FakeReservationRepository implements ReservationRepository {
 
     private final Map<Long, Reservation> storage = new HashMap<>();
     private long sequence = 1L;
@@ -27,7 +27,7 @@ public class FakeReservationDao implements ReservationRepository {
         long id = sequence++;
         Reservation savedReservation = new Reservation(
                 id,
-                reservation.getName(),
+                reservation.getMember(),
                 reservation.getDate(),
                 reservation.getTime(),
                 reservation.getTheme(),
@@ -58,9 +58,9 @@ public class FakeReservationDao implements ReservationRepository {
     }
 
     @Override
-    public List<Reservation> findByName(String name) {
+    public List<Reservation> findByMemberId(Long memberId) {
         return storage.values().stream()
-                .filter(reservation -> Objects.equals(reservation.getName(), name))
+                .filter(reservation -> Objects.equals(reservation.getMember().getId(), memberId))
                 .toList();
     }
 
@@ -85,7 +85,7 @@ public class FakeReservationDao implements ReservationRepository {
         Reservation getReservation = storage.get(id);
         Reservation newReservation = new Reservation(
                 getReservation.getId(),
-                getReservation.getName(),
+                getReservation.getMember(),
                 reservation.getDate(),
                 reservation.getTime(),
                 reservation.getTheme(),
@@ -99,7 +99,7 @@ public class FakeReservationDao implements ReservationRepository {
     public boolean existsByThemeId(long themeId) {
         return storage.values().stream()
                 .anyMatch(reservation ->
-                            Objects.equals(reservation.getTheme().getId(), themeId)
+                        Objects.equals(reservation.getTheme().getId(), themeId)
                 );
     }
 

@@ -1,4 +1,4 @@
-package roomescape.repository;
+package roomescape.infra;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
